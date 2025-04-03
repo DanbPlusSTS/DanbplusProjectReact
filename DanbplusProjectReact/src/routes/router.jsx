@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/home/HomePages";
 import Login from "../pages/login/LoginForm";
 import Layout from "../layouts/Layout";
+import Admin from "../pages/admin/AdminForm";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
         index: true, // 기본 경로 (`/`)
         element: <HomePage />,
       },
+      {
+        path: "/admin",
+        element: <Admin />
+      }
     ],
   },
 ]);

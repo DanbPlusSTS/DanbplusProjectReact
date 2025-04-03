@@ -1,11 +1,10 @@
 /**
  * GET - API 통신
- * @param {*} url 
- * @param {*} data 
+ * @param {*} url
  * @param {*} callback 
  */
 export const GET = async (url, callback) => {
-    fetchAction(url, "GET", null, callback);
+    await fetchAction(url, "GET", null, callback);
 }
 /**
  * POST - API 통신
@@ -14,7 +13,7 @@ export const GET = async (url, callback) => {
  * @param {*} callback 
  */
 export const POST = async (url, data, callback) => {
-    fetchAction(url, "POST", data, callback);
+    await fetchAction(url, "POST", data, callback);
 }
 /**
  * PUT - API 통신
@@ -23,7 +22,7 @@ export const POST = async (url, data, callback) => {
  * @param {*} callback 
  */
 export const PUT = async (url, data, callback) => {
-    fetchAction(url, "PUT", data, callback);
+    await fetchAction(url, "PUT", data, callback);
 }
 /**
  * DELETE - API 통신
@@ -32,18 +31,18 @@ export const PUT = async (url, data, callback) => {
  * @param {*} callback 
  */
 export const DELETE = async (url, data, callback) => {
-    fetchAction(url, "DELETE", data, callback);
+    await fetchAction(url, "DELETE", data, callback);
 }
 
 /**
- * 
+ *
  * POST - API 통신 (파일 업로드용)
- * @param {*} url 
- * @param {*} data 
- * @param {*} callback 
+ * @param {*} url
+ * @param {*} data
+ * @param {*} callback
  */
 export const POST_FILE = async (url, data, callback) => {
-    fetchAction(url, "POST", data, callback, true);
+    await fetchAction(url, "POST", data, callback, true);
 }
 
 /**
@@ -52,9 +51,10 @@ export const POST_FILE = async (url, data, callback) => {
  * @param method
  * @param data
  * @param callback
+ * @param isFileUpload
  * @returns {Promise<void>}
  */
-export const fetchAction = async (url, method, data, callback, isFileUpload = false) => {
+export const fetchAction = (url, method, data, callback, isFileUpload = false) => {
     let baseUrl = 'http://localhost:8080/api/v1';
 
     // api 통신 옵션
@@ -73,7 +73,7 @@ export const fetchAction = async (url, method, data, callback, isFileUpload = fa
         options.body = (method === "GET") ? undefined : JSON.stringify(data); // GET은 body 없음
     }
 
-    await fetch(`${baseUrl}${url}`, options)
+     fetch(`${baseUrl}${url}`, options)
         .then(response => {
             if (!response.ok) throw new Error("Network response was not ok");
             return response.json();
