@@ -16,7 +16,8 @@ const Layout = () => {
       <div id="layoutSidenav">
         {/* Sidebar (메뉴 영역) */}
         <div id="layoutSidenav_nav">
-          <Sidebar /> {/* 여기에 사이드바 추가 */}
+          {/* 테스트를 위한 하드코딩 - 사용자 정보에 맞게 수정할 것! (2025.04.03) */}
+          <Sidebar userNo={"1"} gradeCd={"GRADE00001"} /> {/* 여기에 사이드바 추가 */}
         </div>
 
         {/* Body & Footer 영역 */}

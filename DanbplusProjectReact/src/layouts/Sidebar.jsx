@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaBookOpen, FaAngleDown } from "react-icons/fa";
-import {fetchAction} from "../cmm";
+import { GET } from "../utils/com";
 
 const Sidebar = ({ userNo, gradeCd }) => {
   const [menuData, setMenuData] = useState([]);
   const [openMenus, setOpenMenus] = useState({});
-
-  useEffect( () => {
-    fetchAction(
-        "/menu/layoutMenuList.act?userNo=1&gradeCd=GRADE00001",
-        "GET",
-        null,
-        (result) => {
-          setMenuData(buildMenuHierarchy(result))
-        }
-    );
+  
+  // 메뉴 
+  useEffect(() => {
+    GET(`/menu/menuList?userNo=${userNo}&gradeCd=${gradeCd}`, (result) => { setMenuData(buildMenuHierarchy(result)) });
   }, [userNo, gradeCd]);
 
   function buildMenuHierarchy(list) {
