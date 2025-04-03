@@ -10,7 +10,8 @@ export const fetchAction = async (url, method, data, callback) => {
 
     await fetch(`http://localhost:8080/api/v1${url}`, {
         method: method,
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        body: data
     })
         .then(response => {
             if (!response.ok) throw new Error("Network response was not ok");
@@ -25,6 +26,10 @@ export const fetchAction = async (url, method, data, callback) => {
             console.error("❌ 데이터 가져오기 오류:", error);
         });
 
+}
+
+export const x = () => {
+  
 }
 
 

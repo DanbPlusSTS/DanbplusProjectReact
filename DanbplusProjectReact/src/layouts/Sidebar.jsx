@@ -10,8 +10,8 @@ const Sidebar = ({ userNo, gradeCd }) => {
   useEffect( () => {
     fetchAction(
         "/menu/layoutMenuList.act?userNo=1&gradeCd=GRADE00001",
-        "GET"
-        ,null,
+        "GET",
+        null,
         (result) => {
           setMenuData(buildMenuHierarchy(result))
         }
