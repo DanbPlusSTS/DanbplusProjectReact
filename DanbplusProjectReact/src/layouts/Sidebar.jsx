@@ -1,39 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaBookOpen, FaAngleDown } from "react-icons/fa";
+import {fetchAction} from "../cmm";
 
 const Sidebar = ({ userNo, gradeCd }) => {
   const [menuData, setMenuData] = useState([]);
   const [openMenus, setOpenMenus] = useState({});
 
-  useEffect(() => {
-    async function fetchMenuData() {
-      try {
-        const response = await fetch(
-          // `http://localhost:8080/api/v1/menu/layoutMenuList.act?userNo=${userNo}&gradeCd=${gradeCd}`,
-          `http://localhost:8080/api/v1/menu/layoutMenuList.act?userNo=1&gradeCd=GRADE00001`, 
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
-        if (!response.ok) throw new Error("Network response was not ok");
-
-        const result = await response.json();
-        console.log("✅ API 응답 데이터:", result);
-
-        // "data" 키가 없거나 배열이 아닐 경우 기본값 설정
-        if (!result.data || !Array.isArray(result.data)) {
-          throw new Error("menu data가 존재하지 않거나 배열이 아닙니다.");
+  useEffect( () => {
+    fetchAction(
+        "/menu/layoutMenuList.act?userNo=1&gradeCd=GRADE00001",
+        "GET"
+        ,null,
+        (result) => {
+          setMenuData(buildMenuHierarchy(result))
         }
-
-        setMenuData(buildMenuHierarchy(result.data));
-      } catch (error) {
-        console.error("❌ 메뉴 데이터 가져오기 오류:", error);
-      }
-    }
-    fetchMenuData();
+    );
   }, [userNo, gradeCd]);
 
   function buildMenuHierarchy(list) {
