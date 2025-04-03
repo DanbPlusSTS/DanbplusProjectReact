@@ -1,8 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/home/HomePages";
+import Login from "../pages/login/LoginForm";
 import Layout from "../layouts/Layout";
 
 const router = createBrowserRouter([
+  {
+    path: "/loginForm", // 로그인 페이지는 레이아웃 없이 단독 표시
+    element: <Login />,
+  },
   {
     path: "/",
     element: <Layout />, // 전체 레이아웃 적용
